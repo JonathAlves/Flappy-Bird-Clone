@@ -28,11 +28,7 @@ public class Entity {
 	
 	public boolean debug = false;
 	
-	private BufferedImage sprite;
-	public static BufferedImage MACA_SPRITE = Game.spritesheet.getSprite(62, 1, 16, 16);
-	public static BufferedImage ENEMY1 = Game.spritesheet.getSprite(78, 1, 16, 16);
-	public static BufferedImage ENEMY2 = Game.spritesheet.getSprite(95, 1, 16, 16);
-	public static BufferedImage ENEMYGHOST = Game.spritesheet.getSprite(111, 1, 16, 16);
+	public BufferedImage sprite;
 
 	public static Random rand = new Random();
 	

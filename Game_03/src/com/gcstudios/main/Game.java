@@ -1,9 +1,6 @@
 package com.gcstudios.main;
 
-import com.gcstudios.entities.Entity;
-import com.gcstudios.entities.GameState;
-import com.gcstudios.entities.GeradorObstaculo;
-import com.gcstudios.entities.Player;
+import com.gcstudios.entities.*;
 import com.gcstudios.graficos.Spritesheet;
 import com.gcstudios.graficos.UI;
 import com.gcstudios.world.World;
@@ -28,6 +25,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static final int HEIGHT = 160;
 	public static final int SCALE = 3;
 	private BufferedImage image;
+	private BufferedImage floor;
 	public static List<Entity> entities;
 	public static Spritesheet spritesheet;
 	public static Player player;
@@ -35,6 +33,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static double score = 0;
 	public static GameState gamestate = GameState.MENU;
 	public static GeradorObstaculo geradorObstaculo;
+	public static GeradorGrama geradorGrama;
 	public Menu menu;
 	public EndGame endGame;
 
@@ -44,12 +43,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		setPreferredSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
 		initFrame();
 		image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-		
+
 		//Inicializando objetos.
 		spritesheet = new Spritesheet("/spritesheet.png");
 		entities = new ArrayList<Entity>();
 		player = new Player(WIDTH/2 - 40,HEIGHT/2,16,16,1.2,spritesheet.getSprite(0, 0,16,16));
 		geradorObstaculo = new GeradorObstaculo();
+		geradorGrama = new GeradorGrama();
+
+
+
 		ui = new UI();
 		menu = new Menu();
 		endGame = new EndGame();
@@ -91,6 +94,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public void tick() {
 		if(gamestate.equals(GameState.NORMAL)){
 			geradorObstaculo.tick();
+			geradorGrama.tick();
 			for (int i = 0; i < entities.size(); i++) {
 				Entity e = entities.get(i);
 				e.tick();
@@ -111,8 +115,8 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		Graphics g = image.getGraphics();
 		g.setColor(new Color(100,180,255));
 		g.fillRect(0, 0,WIDTH,HEIGHT);
-		
-		/*Renderização do jogo*/
+
+		/*Renderizaï¿½ï¿½o do jogo*/
 		Collections.sort(entities,Entity.nodeSorter);
 		for(int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
@@ -170,12 +174,16 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			if(gamestate.equals(GameState.ENDGAME) ){
-				endGame.enter = true;
-			}else if(gamestate.equals(GameState.MENU)){
+			 if(gamestate.equals(GameState.MENU)){
 				menu.enter = true;
 			}
 			player.isPressed = true;
+		}
+
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			if(gamestate.equals(GameState.ENDGAME) ){
+				endGame.enter = true;
+			}
 		}
 	}
 

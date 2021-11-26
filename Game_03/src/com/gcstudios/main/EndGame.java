@@ -27,6 +27,6 @@ public class EndGame {
         g.setFont(new Font("arial", Font.BOLD, 15));
         g.drawString("Pontos: " + (int)Game.score, (Game.WIDTH*Game.SCALE)/2 - 275, (Game.HEIGHT*Game.SCALE)/2 - 140);
         g.setFont(new Font("arial", Font.BOLD, 10));
-        g.drawString("Pressione Espaco para reiniciar", (Game.WIDTH*Game.SCALE)/2 - 320, (Game.HEIGHT*Game.SCALE)/2 - 100);
+        g.drawString("Pressione ENTER para reiniciar", (Game.WIDTH*Game.SCALE)/2 - 315, (Game.HEIGHT*Game.SCALE)/2 - 100);
     }
 }

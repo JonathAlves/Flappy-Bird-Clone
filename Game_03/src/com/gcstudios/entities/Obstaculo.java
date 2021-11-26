@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Obstaculo extends Entity{
+
     public Obstaculo(double x, double y, int width, int height, double speed, BufferedImage sprite) {
         super(x, y, width, height, speed, sprite);
     }
@@ -20,7 +21,14 @@ public class Obstaculo extends Entity{
     }
 
     public void render(Graphics g){
-        g.setColor(Color.green);
-        g.fillRect((int)x, (int)y, width, height);
+
+        if(sprite != null){
+            g.drawImage(sprite, this.getX(), this.getY(), width, height, null);
+
+        }else{
+            g.setColor(Color.green);
+            g.fillRect((int)x, (int)y, width, height);
+        }
+
     }
 }

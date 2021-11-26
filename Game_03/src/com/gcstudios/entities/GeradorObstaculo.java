@@ -8,12 +8,13 @@ public class GeradorObstaculo {
     public void tick(){
         time++;
         if(time == targetTime){
+
             int altura1 = Entity.rand.nextInt(60 - 30) + 30;
-            Obstaculo obst1 = new Obstaculo(Game.WIDTH, 0, 20, altura1, 1, null);
+            Obstaculo obst1 = new Obstaculo(Game.WIDTH, 0, 20, altura1, 1, Game.spritesheet.getSprite(16, 16, 16, 16));
             Game.entities.add(obst1);
 
-            int altura2 = Entity.rand.nextInt(60 - 30) + 30;
-            Obstaculo obst2 = new Obstaculo(Game.WIDTH, Game.HEIGHT - altura2, 20, altura2, 1, null);
+            int altura2 = Entity.rand.nextInt(70 - 30) + 30;
+            Obstaculo obst2 = new Obstaculo(Game.WIDTH, Game.HEIGHT - altura2, 20, altura2, 1, Game.spritesheet.getSprite(32, 16, 16, 16));
             Game.entities.add(obst2);
             time = 0;
         }
